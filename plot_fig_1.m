@@ -1,4 +1,7 @@
-
+if epsilon1 ~= 0
+    disp('epsilon WARNING')
+    pause
+end
 figure('Position',[10 10 1200 650]);
 pause(.5)
 for ik = 1:4
@@ -29,14 +32,14 @@ if ik == 1
 title(['(A) Mean ',varnameout,', CTL'],'fontsize',11);
 caxis(caxis1)
 elseif ik == 2
-title(strcat('(B) (CTL-LP)/(|CTL|+\epsilon)'),'fontsize',11);
+title(strcat('(B) (CTL-LP)/(|CTL|)'),'fontsize',11);
 %caxis([-1e-8 1e-8])
 caxis([-1 1])
 elseif ik == 3
 title(strcat('(C) Seasonal cycle amplitude,',' CTL'),'fontsize',11);
 caxis(caxis2)
 elseif ik == 4
-title(strcat('(D) (CTL-LP)/(|CTL|+\epsilon)'),'fontsize',11);
+title(strcat('(D) (CTL-LP)/(|CTL|)'),'fontsize',11);
 %caxis([-5e-8 5e-8])
 caxis([-1 1])
 end

@@ -1,39 +1,68 @@
 % stats for plotting
 % 3,2,1
-% remove mean/zero freq.
 fractotall=sqrt(sum(abs(varoutoldPS).*dfreq,3)-abs(varoutoldPS(:,:,nfreq/2+1,:)).*dfreq);
 fractotallmean=squeeze(nanmean(fractotall,4));
 fractotallstd=squeeze(nanstd(fractotall,0,4));
+clear tout pvalue
+tout=sqrt(5)*abs(fractotallmean)./fractotallstd;
+pvalue=1-tcdf(tout,5-1);
+% set pvalue threshold for insignificance
+mask=pvalue>.05;
+fractotallmean(mask)=nan;
 
 
+% fractotallLP=sqrt(sum(abs(varoutPS).*dfreq,3)-abs(varoutPS(:,:,nfreq/2+1,:)).*dfreq);
+% fractotallLPmean=squeeze(nanmean(fractotallLP,4));
+% fractotallLPstd=squeeze(nanstd(fractotallLP,0,4));
+% clear tout pvalue
+% tout=sqrt(5)*abs(fractotallLPmean)./fractotallLPstd;
+% pvalue=1-tcdf(tout,5-1);
+% % set pvalue threshold for insignificance
+% mask=pvalue>.05;
+% fractotallLPmean(mask)=nan;
 
 % 3,2,2
 difftotvarmo= fractotall -sqrt((sum(abs(varoutPS).*dfreq,3)-abs(varoutPS(:,:,nfreq/2+1,:)).*dfreq));
-%difftotvarmomean=squeeze(nanmean(difftotvarmo,4));
+difftotvarmomean=squeeze(nanmean(difftotvarmo,4));
 difftotvarmostd=squeeze(nanstd(difftotvarmo,0,4));
-clear tempvar tempmeanvar
-tempvar=squeeze(difftotvarmo);
-tempvar=reshape(tempvar,[size(tempvar,1)*size(tempvar,2) size(tempvar,3)*size(tempvar,4)]);
-tempmeanvar=remove_insignificant_points(tempvar,1);
-difftotvarmomean=reshape(tempmeanvar,[size(difftotvarmo,1) size(difftotvarmo,2)]);
-
+clear tout pvalue
+tout=sqrt(5)*abs(difftotvarmomean)./difftotvarmostd;
+pvalue=1-tcdf(tout,5-1);
+% set pvalue threshold for insignificance
+mask=pvalue>.05;
+difftotvarmomean(mask)=nan;
 
 % 3,2,3
 fracintravar=sqrt(sum(2.*abs(varoutoldPS(:,:,(nfreq/2+8):end,:)).*dfreq,3));
 fracintravarmean=squeeze(nanmean(fracintravar,4));
 fracintravarstd=squeeze(nanstd(fracintravar,0,4));
+clear tout pvalue
+tout=sqrt(5)*abs(fracintravarmean)./fracintravarstd;
+pvalue=1-tcdf(tout,5-1);
+% set pvalue threshold for insignificance
+mask=pvalue>.05;
+fracintravarmean(mask)=nan;
 
-
+% fracintravarLP=sqrt(sum(2.*abs(varoutPS(:,:,(nfreq/2+8):end,:)).*dfreq,3));
+% fracintravarLPmean=squeeze(nanmean(fracintravarLP,4));
+% fracintravarLPstd=squeeze(nanstd(fracintravarLP,0,4));
+% clear tout pvalue
+% tout=sqrt(5)*abs(fracintravarLPmean)./fracintravarLPstd;
+% pvalue=1-tcdf(tout,5-1);
+% % set pvalue threshold for insignificance
+% mask=pvalue>.05;
+% fracintravarLPmean(mask)=nan;
 
 % 3,2,4
 diffintravarmo=fracintravar-sqrt(sum(2.*abs(varoutPS(:,:,(nfreq/2+8):end,:)).*dfreq,3));
-%diffintravarmomean=squeeze(nanmean(diffintravarmo,4));
+diffintravarmomean=squeeze(nanmean(diffintravarmo,4));
 diffintravarmostd=squeeze(nanstd(diffintravarmo,0,4));
-clear tempvar tempmeanvar
-tempvar=squeeze(diffintravarmo);
-tempvar=reshape(tempvar,[size(tempvar,1)*size(tempvar,2) size(tempvar,3)*size(tempvar,4)]);
-tempmeanvar=remove_insignificant_points(tempvar,1);
-diffintravarmomean=reshape(tempmeanvar,[size(diffintravarmo,1) size(diffintravarmo,2)]);
+clear tout pvalue
+tout=sqrt(5)*abs(diffintravarmomean)./diffintravarmostd;
+pvalue=1-tcdf(tout,5-1);
+% set pvalue threshold for insignificance
+mask=pvalue>.05;
+diffintravarmomean(mask)=nan;
 
 
 % 3,2,5

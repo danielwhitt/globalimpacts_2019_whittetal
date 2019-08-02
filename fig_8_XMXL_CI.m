@@ -14,6 +14,7 @@ cblabel1='log_{10} m'
 varoutname='MLD'
 caxis1=log10([1e-3.*600./2.8 (600./2.8)])
 epsilon1=1
+epsilon1=0
 exportname='fig_8_MLD.png'
 exportname2='fig_fracvarMLD.png'
 exportname3='fig_phasevarMLD.png'
@@ -25,7 +26,7 @@ tlat=extract_fieldfn(fn0,'TLAT',[0 0],[3600 2400],[skct skct]);
 tlon=extract_fieldfn(fn0,'TLONG',[0 0],[3600 2400],[skct skct]);
 tlon(tlon>500)=nan;
 tlat(tlat>500)=nan;
-tlatg=repmat(tlat,[1 1 nfreq]);
+tlatg=repmat(tlat,[1 1 nt]);
 tarea=extract_fieldfn(fn0,'TAREA',[0 0],[3600 2400],[skct skct])./1e10;
 tareag=repmat(tarea,[1 1 nfreq]);
 maskhotspots=extract_fieldfn('regional_mask_all1.nc','mask_hotspots',[0 0],[3600 2400],[skct skct]);
@@ -64,6 +65,8 @@ for ik = 1:2
         clear varhat varoutPS varout varoutPhS
     end
 end
+tlatg=repmat(tlat,[1 1 nfreq]);
+
 save('/glade/p/cgd/oce/people/dwhitt/nsfsubmeso/WhittNicholsonCarranza_public/fig_8_XMXL_CI.mat','-v7.3')
 
 create_stats_2;

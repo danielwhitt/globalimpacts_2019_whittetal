@@ -57,56 +57,56 @@ ratioglobal=1-nansum(nansum(nansum(wtsg.*tareag.*varoutclmo./varoutoldclmo.*tlat
 
 
 
-clear varoutclmo varoutoldclmo
-varoutclmo=squeeze(nanmean(squeeze(max(varoutmo,[],3)-min(varoutmo,[],3)),3));
-varoutoldclmo=squeeze(nanmean(squeeze(max(varoutoldmo,[],3)-min(varoutoldmo,[],3)),3));
+clear varoutclmoseasamp varoutoldclmoseasamp
+varoutclmoseasamp=squeeze(nanmean(squeeze(max(varoutmo,[],3)-min(varoutmo,[],3)),3));
+varoutoldclmoseasamp=squeeze(nanmean(squeeze(max(varoutoldmo,[],3)-min(varoutoldmo,[],3)),3));
 
 
 
 display('Difference, global area avg. seas cycl ampl.: ')
-CTLglobal=nansum(nansum(tarea.*varoutoldclmo,2),1)./nansum(nansum(tarea,2),1)
-LPglobal=nansum(nansum(tarea.*varoutclmo,2),1)./nansum(nansum(tarea,2),1)
-ratioglobal=1-nansum(nansum(tarea.*varoutclmo./varoutoldclmo,2),1)./nansum(nansum(tarea,2),1)
+CTLglobal=nansum(nansum(tarea.*varoutoldclmoseasamp,2),1)./nansum(nansum(tarea,2),1)
+LPglobal=nansum(nansum(tarea.*varoutclmoseasamp,2),1)./nansum(nansum(tarea,2),1)
+ratioglobal=1-nansum(nansum(tarea.*varoutclmoseasamp./varoutoldclmoseasamp,2),1)./nansum(nansum(tarea,2),1)
 1-LPglobal/CTLglobal
 
 display('<-66:')
 tlatgmask=ones(size(tlat));
 tlatgmask(tlat>-66)=nan;
-CTLglobal=nansum(nansum(tarea.*varoutoldclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
-LPglobal=nansum(nansum(tarea.*varoutclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
-ratioglobal=1-nansum(nansum(tarea.*varoutclmo./varoutoldclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+CTLglobal=nansum(nansum(tarea.*varoutoldclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+LPglobal=nansum(nansum(tarea.*varoutclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+ratioglobal=1-nansum(nansum(tarea.*varoutclmoseasamp./varoutoldclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
 1-LPglobal/CTLglobal
 
 display('>66:')
 tlatgmask=ones(size(tlat));
 tlatgmask(tlat<66)=nan;
-CTLglobal=nansum(nansum(tarea.*varoutoldclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
-LPglobal=nansum(nansum(tarea.*varoutclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
-ratioglobal=1-nansum(nansum(tarea.*varoutclmo./varoutoldclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+CTLglobal=nansum(nansum(tarea.*varoutoldclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+LPglobal=nansum(nansum(tarea.*varoutclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+ratioglobal=1-nansum(nansum(tarea.*varoutclmoseasamp./varoutoldclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
 1-LPglobal/CTLglobal
 
 
 display('abs(lat) < 30:')
 tlatgmask=ones(size(tlat));
 tlatgmask(abs(tlat)>30)=nan;
-CTLglobal=nansum(nansum(tarea.*varoutoldclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
-LPglobal=nansum(nansum(tarea.*varoutclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
-ratioglobal=1-nansum(nansum(tarea.*varoutclmo./varoutoldclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+CTLglobal=nansum(nansum(tarea.*varoutoldclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+LPglobal=nansum(nansum(tarea.*varoutclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+ratioglobal=1-nansum(nansum(tarea.*varoutclmoseasamp./varoutoldclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
 1-LPglobal/CTLglobal
 
 display('> 30:')
 tlatgmask=ones(size(tlat));
 tlatgmask(tlat<30)=nan;
-CTLglobal=nansum(nansum(tarea.*varoutoldclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
-LPglobal=nansum(nansum(tarea.*varoutclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
-ratioglobal=1-nansum(nansum(tarea.*varoutclmo./varoutoldclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+CTLglobal=nansum(nansum(tarea.*varoutoldclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+LPglobal=nansum(nansum(tarea.*varoutclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+ratioglobal=1-nansum(nansum(tarea.*varoutclmoseasamp./varoutoldclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
 1-LPglobal/CTLglobal
 
 
 display('< -30:')
 tlatgmask=ones(size(tlat));
 tlatgmask(tlat>-30)=nan;
-CTLglobal=nansum(nansum(tarea.*varoutoldclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
-LPglobal=nansum(nansum(tarea.*varoutclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
-ratioglobal=1-nansum(nansum(tarea.*varoutclmo./varoutoldclmo.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+CTLglobal=nansum(nansum(tarea.*varoutoldclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+LPglobal=nansum(nansum(tarea.*varoutclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
+ratioglobal=1-nansum(nansum(tarea.*varoutclmoseasamp./varoutoldclmoseasamp.*tlatgmask,2),1)./nansum(nansum(tarea.*tlatgmask,2),1)
 1-LPglobal/CTLglobal

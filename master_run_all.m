@@ -1,6 +1,11 @@
 fig_1_stress_CI;
+pause(5)
 fig_2_stress_CI;
-fig_4_stress_CI;
+pause(5)
+fig_4_bflux_CI;
+pause(5)
 fig_5_bflux_CI;
+pause(5)
 fig_7_XMXL_CI;
+pause(5)
 fig_8_XMXL_CI;

@@ -1,7 +1,7 @@
 restoredefaultpath
 clear all
 %close all
-fricvel = 0
+fricvel = 1
 addpath ./utility
 addpath ./cmocean_v1
 addpath ./export_fig-master/
@@ -17,6 +17,7 @@ skct=6
 if fricvel == 1
     % friction velocity
     epsilon1=1e-4
+    epsilon1=0
     cblabel1='m/s'
     varnameout='u_*'
     exportname='fig_1_fricvel.png'
@@ -24,6 +25,7 @@ if fricvel == 1
     caxis2=[0 .018]
 else
     epsilon1=1e-2
+    epsilon1 = 0
     cblabel1='N/m^2'
     varnameout='|\tau|'
     exportname='fig_1_stress.png'
@@ -38,7 +40,7 @@ tlat = ncread(fn0,'ULAT');
 tlon = ncread(fn0,'ULONG');
 tlat=tlat(1:skct:end,1:skct:end);
 tlon=tlon(1:skct:end,1:skct:end);
-tlatg=repmat(tlat,[1 1 12]);
+tlatg=repmat(tlat,[1 1 5*365]);
 tarea=ncread(fn0,'UAREA')./(1e10);
 tarea=tarea(1:skct:end,1:skct:end);
 
@@ -66,7 +68,8 @@ if fricvel==1
     varoutold=sqrt(varoutold./1026);
     varout=sqrt(varout./1026);
 end
-save('/glade/p/cgd/oce/people/dwhitt/nsfsubmeso/WhittNicholsonCarranza_public/fig_1_stress_CI.mat','-v7.3')
+tlatg=repmat(tlat,[1 1 12]);
+save('/glade/p/cgd/oce/people/dwhitt/nsfsubmeso/WhittNicholsonCarranza_public/fig_1_fricvel_CI.mat','-v7.3')
 %%
 create_monthly_means;
 %%
@@ -75,6 +78,7 @@ create_stats_1;
 plot_fig_1;
 %% Some area stats
 create_stats_1b;
+save('/glade/p/cgd/oce/people/dwhitt/nsfsubmeso/WhittNicholsonCarranza_public/fig_1_fricvel_fig_9_load.mat')
 
 
 

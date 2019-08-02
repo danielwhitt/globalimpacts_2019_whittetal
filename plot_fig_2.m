@@ -1,4 +1,8 @@
 %% plotting
+if epsilon1 ~= 0
+    disp('epsilon WARNING')
+    pause
+end
 figure('Position',[1 1 800 800]);
 pause(.5)
 subplot(3,2,1),...
@@ -30,7 +34,7 @@ gridm(':')
 gridm('GLineWidth',1)
 axis off
 h = colorbar('h','location','eastoutside')
-title(strcat('(B) CTL-LP/(|CTL|+\epsilon)'));
+title(strcat('(B) CTL-LP/(|CTL|)'));
 caxis([-1 1])
 addpath ~/cmocean_v1
 cmap=cmocean('balance');
@@ -65,7 +69,7 @@ gridm(':')
 gridm('GLineWidth',1)
 axis off
 h = colorbar('h','location','eastoutside')
-title(strcat('(D) CTL-LP/(|CTL|+\epsilon)'));
+title(strcat('(D) CTL-LP/(|CTL|)'));
 caxis([-1 1])
 addpath ~/cmocean_v1
 cmap=cmocean('balance');

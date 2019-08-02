@@ -8,7 +8,7 @@ fn{2} = '/glade/p/cgd/oce/people/dwhitt/nsfsubmeso/WhittNicholson_data/LP/XMXL-a
 %pause
 addpath ./export_fig-master
 addpath ./utility
-epsilon1 = 1
+epsilon1 = 0
 cblabel1='m'
 varnameout='MLD'
 exportname='fig_7_MLD.png'
@@ -22,7 +22,7 @@ tlat=tlat(1:skct:end,1:skct:end);
 tlon=tlon(1:skct:end,1:skct:end);
 tlon(tlon>500)=nan;
 tlat(tlat>500)=nan;
-tlatg=repmat(tlat,[1 1 12]);
+tlatg=repmat(tlat,[1 1 5*365]);
 tarea=ncread(fn0,'TAREA')./(1e10);
 tarea=tarea(1:skct:end,1:skct:end);
 tareag=repmat(tarea,[1 1 12]);
@@ -48,6 +48,7 @@ for ik = 1:2
         clear varout varnow
     end
 end
+tlatg=repmat(tlat,[1 1 12]);
 save('/glade/p/cgd/oce/people/dwhitt/nsfsubmeso/WhittNicholsonCarranza_public/fig_7_XMXL_CI.mat','-v7.3')
 
 %%
@@ -58,3 +59,5 @@ create_stats_1;
 plot_fig_1;
 %% Some area stats
 create_stats_1b;
+save('/glade/p/cgd/oce/people/dwhitt/nsfsubmeso/WhittNicholsonCarranza_public/fig_7_XMXL_fig_9_load.mat')
+
