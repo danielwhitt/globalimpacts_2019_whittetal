@@ -1,6 +1,7 @@
+% run after fig_9_ustardiffvsMLDdiff_CI.m
+
 figure; 
 odallflag =0
-
 OUT2=squeeze(nanmean(nanmean(deltaMLD(round(stidx{6}(1)/6):(round((stidx{6}(1)+lenidx{6}(1))/6)),round(stidx{6}(2)/6):(round((stidx{6}(2)+lenidx{6}(2))/6)),:),1),2));
 OUT1=squeeze(nanmean(nanmean(deltaustar(round(stidx{6}(1)/6):(round((stidx{6}(1)+lenidx{6}(1))/6)),round(stidx{6}(2)/6):(round((stidx{6}(2)+lenidx{6}(2))/6)),:),1),2));
 windowSize = 3; 
@@ -18,8 +19,8 @@ grid on
 OUT1=squeeze(nanmean(nanmean(deltaustar(round(stidx{5}(1)/6):(round((stidx{5}(1)+lenidx{5}(1))/6)),round(stidx{5}(2)/6):(round((stidx{5}(2)+lenidx{5}(2))/6)),:),1),2));
 OUT2=squeeze(nanmean(nanmean(deltaMLD(round(stidx{5}(1)/6):(round((stidx{5}(1)+lenidx{5}(1))/6)),round(stidx{5}(2)/6):(round((stidx{5}(2)+lenidx{5}(2))/6)),:),1),2));
 subplot(2,2,1),...
-    plot(0:13,filtfilt(b,a,[OUT1(end) OUT1' OUT1(1)]),'r-',...
-    0:13,filtfilt(b,a,[OUT2(end) OUT2' OUT2(1)]),'b-','linewidth',2);
+    plot(0:13,filtfilt(b,a,[OUT1(end) OUT1' OUT1(1)]),'r-',... % ustar
+    0:13,filtfilt(b,a,[OUT2(end) OUT2' OUT2(1)]),'b-','linewidth',2); % MLD
 hold on;
     %1:12,squeeze(nanmean(nanmean(deltaOUT(round(stidx{5}(1)/6):(round((stidx{5}(1)+lenidx{5}(1))/6)),round(stidx{5}(2)/6):(round((stidx{5}(2)+lenidx{5}(2))/6)),:),1),2)))
 xlim([1 12])
@@ -27,8 +28,8 @@ ylim([0 1])
 grid on
 else
  subplot(2,1,2),...
-    plot(0:13,filtfilt(b,a,[OUT1(end) OUT1' OUT1(1)]),'r-',...
-    0:13,filtfilt(b,a,[OUT2(end)  OUT2'  OUT2(1)]),'b-','linewidth',2);
+    plot(0:13,filtfilt(b,a,[OUT1(end) OUT1' OUT1(1)]),'r-',... % ustar
+    0:13,filtfilt(b,a,[OUT2(end)  OUT2'  OUT2(1)]),'b-','linewidth',2); %MLD
 hold on
     %1:12,squeeze(nanmean(nanmean(deltaOUT(round(stidx{6}(1)/6):(round((stidx{6}(1)+lenidx{6}(1))/6)),round(stidx{6}(2)/6):(round((stidx{6}(2)+lenidx{6}(2))/6)),:),1),2))
 xlim([1 12])
@@ -41,8 +42,8 @@ xlabel('Months')
 ylabel('(CTL-LP)/CTL')
 
 subplot(2,1,1),...
-    plot(0:13,filtfilt(b,a,[OUT1(end) OUT1' OUT1(1)]),'r-',...
-    0:13,filtfilt(b,a,[OUT2(end) OUT2' OUT2(1)]),'b-','linewidth',2);
+    plot(0:13,filtfilt(b,a,[OUT1(end) OUT1' OUT1(1)]),'r-',... % ustar
+    0:13,filtfilt(b,a,[OUT2(end) OUT2' OUT2(1)]),'b-','linewidth',2); %MLD
 hold on;
     %1:12,squeeze(nanmean(nanmean(deltaOUT(round(stidx{5}(1)/6):(round((stidx{5}(1)+lenidx{5}(1))/6)),round(stidx{5}(2)/6):(round((stidx{5}(2)+lenidx{5}(2))/6)),:),1),2)))
 xlim([1 12])
@@ -131,13 +132,13 @@ subplot(2,2,itplt),...
 plot(15./30.15+(-59:(365+59))./(30+5./30),(filtfilt(b1,a,ustarromsCTL)-filtfilt(b1,a,ustarroms))./filtfilt(b1,a,ustarromsCTL),'r--','linewidth',1);
 else
 subplot(2,1,itplt),...
-plot(15./30.15+(-59:(365+59))./(30+5./30),(filtfilt(b1,a,MXLROMSCTL)-filtfilt(b1,a,MXLROMS))./filtfilt(b1,a,MXLROMSCTL),'b--','linewidth',1);
+plot(15./30.15+(-59:(365+59))./(30+5./30),(filtfilt(b1,a,ustarromsCTL)-filtfilt(b1,a,ustarroms))./filtfilt(b1,a,ustarromsCTL),'r--','linewidth',1); % ustar
+subplot(2,1,itplt),...
+plot(15./30.15+(-59:(365+59))./(30+5./30),(filtfilt(b1,a,MXLROMSCTL)-filtfilt(b1,a,MXLROMS))./filtfilt(b1,a,MXLROMSCTL),'b--','linewidth',1); % MLD
 %xlim([15 350]./(30+5./30))
 xlim([1 12])
-subplot(2,1,itplt),...
-plot(15./30.15+(-59:(365+59))./(30+5./30),(filtfilt(b1,a,ustarromsCTL)-filtfilt(b1,a,ustarroms))./filtfilt(b1,a,ustarromsCTL),'r--','linewidth',1);
 if itplt==1
-legend('\Delta MLD 3D','\Delta u_* 3D','\Delta MLD 1D','\Delta u_* 1D')
+legend('\Delta u_* 3D','\Delta MLD 3D','\Delta u_* 1D','\Delta MLD 1D')
 end
 end
 %xlim([15 350]./(30+5./30))
