@@ -552,6 +552,11 @@ title(strcat(''));
 caxis([-.5 .5])
 addpath ~/cmocean_v1
 cmap=cmocean('balance');
+% plot lat/lon of 1d models
+latlon1d1(1,:)=[330.04999999999995 -31.020715042064317 5.0 3.0];
+latlon1d1(2,:)=[330.04999999999995 -47.87347880827708 5.0 3.0];
+hold on
+plotm(latlon1d1(:,2)+latlon1d1(:,4)./2,latlon1d1(:,1)+latlon1d1(:,3)./2,'magentao');
 colormap(gca,cmap)
 
 figure;
@@ -569,6 +574,8 @@ title(strcat(''));
 caxis([-.5 .5])
 addpath ~/cmocean_v1
 cmap=cmocean('balance');
+hold on
+plotm(latlon1d1(:,2)+latlon1d1(:,4)./2,latlon1d1(:,1)+latlon1d1(:,3)./2,'magentao');
 colormap(gca,cmap)
 
 figure;
@@ -591,4 +598,30 @@ cmap=cmocean('balance');
 colormap(gca,cmap)
 %title('Normalized (\Delta u_* - \Delta MLD)/(\Delta MLD)')
 title('\Delta MLD-\Delta u_*')
+hold on
+plotm(latlon1d1(:,2)+latlon1d1(:,4)./2,latlon1d1(:,1)+latlon1d1(:,3)./2,'magentao');
+
 set(gcf,'color','w')
+
+load('/glade/p/cgd/oce/people/dwhitt/nsfsubmeso/WhittNicholsonCarranza_public/fig_2_fricvel_fig_9_load.mat','fractotallmean');
+load('/glade/p/cgd/oce/people/dwhitt/nsfsubmeso/WhittNicholsonCarranza_public/fig_1_stress_fig_9_load.mat','varoutoldannmean');
+CVstress=fractotallmean./varoutoldclmomean;
+%[r,p]=corrcoef(CVstress(:),(y3(:)-X3(:)));
+figure;
+load coast
+axm=axesm('MapProjection','robinson');
+%surfm(tlat,tlon,(X3-y3)./(abs(y3)+0)); % this makes a color-filled plot
+surfm(tlat,tlon,CVstress); % this makes a color-filled plot
+
+patchesm(lat,long,0*[1 1 1]);    % this makes grey shading over land
+framem;
+gridm('on')
+gridm(':')
+gridm('GLineWidth',1)
+axis off
+h = colorbar('h','location','eastoutside')
+title(strcat(''));
+%caxis([-0.5 0.5])
+addpath ~/cmocean_v1
+cmap=cmocean('balance');
+colormap(gca,cmap)
